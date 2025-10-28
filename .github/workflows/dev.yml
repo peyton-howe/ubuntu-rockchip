@@ -59,11 +59,6 @@ jobs:
   kernel:
     runs-on: ubuntu-latest
     name: Build kernel 
-    strategy:
-        matrix:
-          suite:
-            - questing
-            - noble
     steps:
       - name: Get more disk space
         uses: jlumbroso/free-disk-space@main
@@ -95,12 +90,12 @@ jobs:
 
       - name: Build
         shell: bash
-        run: sudo ./build.sh --suite=${{ matrix.suite }} --kernel-only
+        run: sudo ./build.sh --suite=noble --kernel-only
 
       - name: Upload
         uses: actions/upload-artifact@v4.3.3
         with:
-            name: linux-rockchip-${{ matrix.suite == 'questing' && '6.1' || matrix.suite == 'noble' && '6.1' }}
+            name: linux-rockchip-6.1
             path: ./build/linux-*.deb
             if-no-files-found: error
 
@@ -157,7 +152,7 @@ jobs:
       - name: Checkout kernel
         uses: actions/download-artifact@v4.1.2
         with:
-            name: linux-rockchip-${{ matrix.suite == 'questing' && '6.1' || matrix.suite == 'noble' && '6.1' }}
+            name: linux-rockchip-6.1
             path: ./build/
 
       - name: Build
