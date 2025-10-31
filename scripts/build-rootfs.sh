@@ -85,13 +85,13 @@ lb config \
     --keyring-packages ubuntu-keyring \
     --linux-flavours "${KERNEL_FLAVOR}"
 
-if [ "${SUITE}" == "noble" ] || [ "${SUITE}" == "jammy" ]; then
-    # Pin rockchip package archives
-    (
-        echo "Package: *"
-        echo "Pin: release o=LP-PPA-phowe6-rockchip"
-        echo "Pin-Priority: 1001"
-    ) > config/archives/extra-ppas.pref.chroot
+if [ "${SUITE}" == "noble" ] || [ "${SUITE}" == "jammy" ] || [ "${SUITE}" == "questing" ]; then
+   # Pin rockchip package archives
+   (
+       echo "Package: *"
+       echo "Pin: release o=LP-PPA-phowe6-rockchip"
+       echo "Pin-Priority: 1001"
+   ) > config/archives/extra-ppas.pref.chroot
 fi
 
 # if [ "${SUITE}" == "noble" ]; then
