@@ -53,13 +53,12 @@ jobs:
       - name: Upload
         uses: actions/upload-artifact@v4.3.3
         with:
-          name: linux-kernel-rockchip
+          name: linux-rockchip
           path: ./build/linux-*.deb
           if-no-files-found: error
   
   rootfs:
     runs-on: ubuntu-latest
-    needs: kernel
     name: Build rootfs 
     strategy:
       matrix:
@@ -94,12 +93,6 @@ jobs:
           udev dosfstools uuid-runtime git-lfs device-tree-compiler python3 \
           python-is-python3 fdisk bc debhelper python3-pyelftools python3-setuptools \
           python3-pkg-resources swig libfdt-dev libpython3-dev dctrl-tools mtd-utils linux-base
-
-      - name: Checkout kernel
-        uses: actions/download-artifact@v4.1.2
-        with:
-          name: linux-kernel-rockchip
-          path: ./build/
       
       - name: Build
         shell: bash
@@ -169,7 +162,7 @@ jobs:
       - name: Checkout kernel
         uses: actions/download-artifact@v4.1.2
         with:
-          name: linux-kernel-rockchip
+          name: linux-rockchip
           path: ./build/
 
       - name: Build
