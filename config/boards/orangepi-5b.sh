@@ -14,7 +14,7 @@ function config_image_hook__orangepi-5b() {
     local overlay="$2"
     local suite="$3"
 
-    if [ "${suite}" == "jammy" ] || [ "${suite}" == "noble" ]; then
+    if [ "${suite}" == "jammy" ] || [ "${suite}" == "noble" ] || [ "${suite}" == "questing" ]; then
         # Install panfork
         chroot "${rootfs}" add-apt-repository -y ppa:jjriek/panfork-mesa
         chroot "${rootfs}" apt-get update
@@ -25,7 +25,7 @@ function config_image_hook__orangepi-5b() {
         chroot "${rootfs}" apt-get -y install libmali-g610-x11
 
         # Install the rockchip camera engine
-        chroot "${rootfs}" apt-get -y install camera-engine-rkaiq-rk3588
+        # chroot "${rootfs}" apt-get -y install camera-engine-rkaiq-rk3588
 
         # Enable bluetooth for AP6275P
         mkdir -p "${rootfs}/usr/lib/scripts"
